@@ -13,6 +13,9 @@ from django.views.generic.edit import FormView
 from .models import ShortUrl
 from .forms import ShortUrlForm
 
+#setting a predefine unique SLUG in the session
+#request.session['fav_color'] = 'blue'
+#http://stackoverflow.com/a/25521706/2581266
 
 def homepage_and_create_shorturl(request, slug=None):
     '''

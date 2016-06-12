@@ -13,4 +13,11 @@ class ContactForm(forms.Form):
 class ShortUrlForm(ModelForm):
     class Meta:
         model = ShortUrl
-        fields = ['url', 'nickname']
+        fields = ['url']
+    '''
+    def clean_nickname(self):
+        nickname = self.cleaned_data['nickname']
+        if ShortUrl.objects.filter(nickname=nickname).exists():
+            raise forms.ValidationError("This nickname is already exists")
+        return nickname
+    '''
