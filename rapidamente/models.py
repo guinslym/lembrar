@@ -4,6 +4,7 @@ import shortuuid
 from django.core.urlresolvers import reverse
 # Create your models here.
 
+
 class ShortUrl(TimeStampedModel):
     url = models.URLField(max_length=250, help_text="i.e. http://www.yahoo.com")
     nickname = models.CharField(max_length=12, blank=True, null=True, help_text="Give a nickname to this url")
