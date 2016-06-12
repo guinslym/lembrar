@@ -12,5 +12,9 @@ from .models import ShortUrl
 from .forms import ShortUrlForm
 
 #Create View
+class ShortUrlCreateView(CreateView):
+    model = ShortUrl
+    fields = ['url', 'nickname']
+    template_name = 'shorturl_form.html'
 
 #About Us
