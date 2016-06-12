@@ -39,6 +39,7 @@ def homepage_and_create_shorturl(request, slug=None):
     return render( request,
                   'shorturl_form.html', {'form':form }
                 )
+
 def detail_box(request, slug):
     '''
 
@@ -46,6 +47,36 @@ def detail_box(request, slug):
     short_url = get_object_or_404(ShortUrl, slug=slug)
     return render( request, 'shorturl_detail.html', {'object':short_url} )
 
+def hello(request):
+    #   import ipdb; ipdb.set_trace()
+    return HttpResponse('<h1>hello</h1>')
 #redirectView
 
 #About Us
+def handler404(request):
+    pathinfo = request.path_info
+    if len(pathinfo)<2:
+        if pathinfo == '/':
+            #Go fill a form to create a urlshortened
+            return redirect('http://localhost:8004/hello/')
+        else:
+            response = redirect('/')
+            response.status_code = 301
+            return response
+    pathinfo = request.path_info[1::]
+    website = ShortUrl.objects.filter(slug=pathinfo)
+    if website:
+        response =  redirect(website[0].url)
+        response.status_code = 301
+        return response
+    else:
+        #I didn't found the url
+        response = render(request, 'page_not_found.html')
+        response.status_code = 404
+        return response
+
+
+def handler500(request):
+    response = render(request, 'emplois/server_error.html')
+    response.status_code = 500
+    return response
