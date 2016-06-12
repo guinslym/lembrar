@@ -5,10 +5,11 @@ from . import views
 app_name = 'rapidamente'
 
 urlpatterns = [
-    #url(r'^(?P<slug>[A-Z0-9]+)/$', views.ShortUrlDetailView.as_view(), name='detail'),
-    #url(r'^hello/$', views.hello, name='detail'),
+    #About Us
+    url(r'^about/$', views.AboutUsTemplateView.as_view(), name='about'),
+    #Create a url shortened POST+GET
+    url(r'^myurl/$', views.homepage_and_create_shorturl, name='create'),
+    #View the URL link
+    url(r'^url/(?P<slug>[0-9A-Za-z-]+)/$', views.detail_box, name='detail'),
 
-#url(r'^(?P<slug>[0-9A-Za-z-]+)/$', views.hello, name='detail_box'),
-    url(r'^url/(?P<slug>[0-9A-Za-z-]+)/$', views.detail_box, name='detail_box'),
-    url(r'^$', views.homepage_and_create_shorturl, name='index'),
 ]

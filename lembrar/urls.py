@@ -9,5 +9,4 @@ urlpatterns = [
 ]
 
 handler404 = 'rapidamente.views.handler404'
-#handler404 = 'applications.emplois.views.handler404'
-#handler500 = 'applications.emplois.views.handler500'
+handler500 = 'rapidamente.views.handler500'

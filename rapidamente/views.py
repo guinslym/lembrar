@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
+from  django.views.generic.base import TemplateView
+from django.core.urlresolvers import reverse
 
 #Contact form
 from django.views.generic.edit import FormView
@@ -16,6 +18,15 @@ from .forms import ShortUrlForm
 #setting a predefine unique SLUG in the session
 #request.session['fav_color'] = 'blue'
 #http://stackoverflow.com/a/25521706/2581266
+class AboutUsTemplateView(TemplateView):
+
+    template_name = "about.html"
+    '''
+    def get_context_data(self, **kwargs):
+        context = super(AboutUsTemplateView, self).get_context_data(**kwargs)
+        context['latest_articles'] = Article.objects.all()[:5]
+        return context
+    '''
 
 def homepage_and_create_shorturl(request, slug=None):
     '''
@@ -50,7 +61,7 @@ def detail_box(request, slug):
     short_url = get_object_or_404(ShortUrl, slug=slug)
     return render( request, 'shorturl_detail.html', {'object':short_url} )
 
-def hello(request):
+def about(request):
     #   import ipdb; ipdb.set_trace()
     return HttpResponse('<h1>hello</h1>')
 #redirectView
@@ -61,7 +72,7 @@ def handler404(request):
     if len(pathinfo)<2:
         if pathinfo == '/':
             #Go fill a form to create a urlshortened
-            return redirect('http://localhost:8004/hello/')
+            return redirect('http://localhost:8004/myurl/')
         else:
             response = redirect('/')
             response.status_code = 301
@@ -80,6 +91,6 @@ def handler404(request):
 
 
 def handler500(request):
-    response = render(request, 'emplois/server_error.html')
+    response = render(request, 'server_error.html')
     response.status_code = 500
     return response
