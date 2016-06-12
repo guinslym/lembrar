@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 class ShortUrl(TimeStampedModel):
     url = models.URLField(max_length=250, help_text="i.e. http://www.yahoo.com")
     nickname = models.CharField(max_length=12, blank=True, null=True, help_text="Give a nickname to this url")
-    slug = models.CharField(max_length=10, unique=True, default=shortuuid.ShortUUID().random(length=3))
+    slug = models.CharField(max_length=10, default=shortuuid.ShortUUID().random(length=6))
     got_nickname = models.BooleanField(default=False)
 
     def __str__(self):

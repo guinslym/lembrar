@@ -13,24 +13,38 @@ from django.views.generic.edit import FormView
 from .models import ShortUrl
 from .forms import ShortUrlForm
 
-#Create View
-class ShortUrlCreateView(CreateView):
-    model = ShortUrl
-    fields = ['url', 'nickname']
-    template_name = 'shorturl_form.html'
 
-def ShortUrlCreateVieww(request):
-    return HttpResponse('<h1>Sjhow all the shuggies for this box: Only admin can view the suggies</h1>')
+def homepage_and_create_shorturl(request, slug=None):
+    '''
+    This is the homepage
+    and
+    it will have a Form to create box
+    then it will show the Sharelink
+    '''
+    if request.method == 'POST':
+        # A form was POSTED
 
-#success url
-class ShortUrlDetailView(DetailView):
-    template_name = 'shorturl_detail.html'
-    model = ShortUrl
+        #import ipdb; ipdb.set_trace()
+        shorturl_form = ShortUrlForm(data=request.POST)
+        #Valid ?
+        if shorturl_form.is_valid():
+            #Create the Box
+            new_shorturl = shorturl_form.save()
+            messages.add_message(request, messages.INFO, 'Congrats!!!')
+            return render(  request,'shorturl_detail.html',
+                            {'object': new_shorturl} )
+        else:
+            messages.add_message(request, messages.INFO, 'Please fill the form')
+    form = ShortUrlForm()
+    return render( request,
+                  'shorturl_form.html', {'form':form }
+                )
+def detail_box(request, slug):
+    '''
 
-    def get_context_data(self, **kwargs):
-            context = super(ShortUrlDetailView, self).get_context_data(**kwargs)
-            context['now'] = timezone.now()
-            return context
+    '''
+    short_url = get_object_or_404(ShortUrl, slug=slug)
+    return render( request, 'shorturl_detail.html', {'object':short_url} )
 
 #redirectView
 
