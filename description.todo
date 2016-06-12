@@ -7,11 +7,12 @@ Models:
 todo:
  ✔ Urls to set (/, About/, Create/) @done(2016-06-12 16:03) @project(todo)
    ✔ Urls 500 @done(2016-06-12 16:03) @project(todo)
- ☐ Expiring date
- ☐ Templates (bootstrap)
+ ✔ Expiring date @done(2016-06-12 16:07) @project(todo)
  ☐ Configuration set
  ☐ remove '.production-settings'
+☐ requirements.txt
+ ☐ Templates (bootstrap)
  ☐ Test to do
- ☐ google recaptcha
- ☐ think about the domain name chopit.ca  yoruba..
+ ✔ google recaptcha @done(2016-06-12 16:17) @project(todo)
+ ☐ think about the domain name chopit.ca  yoruba.. oyanow.ca
  ☐ Uopy... or language

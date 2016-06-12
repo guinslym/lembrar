@@ -1,6 +1,7 @@
 from django import forms
 from . models import  ShortUrl
 from django.forms import ModelForm
+from captcha.fields import ReCaptchaField
 
 class ContactForm(forms.Form):
     name = forms.CharField()
@@ -11,6 +12,7 @@ class ContactForm(forms.Form):
         pass
 
 class ShortUrlForm(ModelForm):
+    captcha = ReCaptchaField(attrs={'theme' : 'clean'})
     class Meta:
         model = ShortUrl
         fields = ['url']

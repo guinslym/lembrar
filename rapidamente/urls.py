@@ -11,5 +11,4 @@ urlpatterns = [
     url(r'^myurl/$', views.homepage_and_create_shorturl, name='create'),
     #View the URL link
     url(r'^url/(?P<slug>[0-9A-Za-z-]+)/$', views.detail_box, name='detail'),
-
 ]
